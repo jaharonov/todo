@@ -14,9 +14,7 @@ var config = {
 var pool = new pg.Pool(config);
 router.post('/', function (req, res) {
     var list = req.body;
-    res.send(201)
     console.log(list);
-
     pool.connect(function (errorConnectingToDb, db, done) {
         if (errorConnectingToDb) {
             console.log('error connecting', errorConnectingToDb);
@@ -28,7 +26,7 @@ router.post('/', function (req, res) {
                     done();
                     if (errorMakingQuery) {
                         console.log('Error making query', errorMakingQuery);
-                        res.sendStatus(500);
+                        res.send(500);
                     } else {
                         res.send(result.rows);
                        
@@ -45,7 +43,7 @@ router.get('/', function (req, res) {
 
         if (errorConnectingToDb) {
             console.log('Error connecting', errorConnectingToDb);
-            res.send(500);
+            res.sendStatus(500);
         } else {
 
             var queryText = 'SELECT * FROM "todo_list";'; //
@@ -54,7 +52,7 @@ router.get('/', function (req, res) {
                 done();
                 if (errorMakingQuery) {
                     console.log('Error making query', errorMakingQuery);
-                    res.send(500);
+                    res.sendStatus(500);
                 } else {
                     res.send(result.rows);
                 }

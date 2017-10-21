@@ -3,6 +3,7 @@ $(document).ready(readyNow);
 
 function readyNow() {
     console.log('ready!');
+    refreshToDos();
 $('form').on('submit', function (event) {
     event.preventDefault();
     submitTask();
@@ -17,8 +18,7 @@ function submitTask() {
     console.log('note:', noteText);
     var objectToSend = {
         task: toDoItem,
-        notes: noteText,
-        
+        notes: noteText
     }
     $('#toDoIn').val('');
     $('#noteIn').val('');
@@ -27,8 +27,8 @@ function submitTask() {
 
 function saveToDo(objectToSend) {
 $.ajax({
-    type: 'POST',
     url: '/todo',
+    type: 'POST',
     data: objectToSend,
     success: function (data){
    console.log('added a new to do', data); 
