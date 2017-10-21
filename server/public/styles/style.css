@@ -1,0 +1,14 @@
+.jumbotron {
+    background-color: rgb(121, 206, 206)
+    
+}
+#title {
+    color: darkgrey;
+    text-align: center;
+    vertical-align: middle;
+}
+
+#formArea {
+    width: 400px;
+    height: 400px;
+}
