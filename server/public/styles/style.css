@@ -12,3 +12,8 @@
     width: 400px;
     height: 400px;
 }
+
+.activated {
+    background-color: pink;
+
+}
