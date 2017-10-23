@@ -11,20 +11,15 @@ $('form').on('submit', function (event) {
 $('#seeToDos').on('click', '#deleteButton', deleteClicked);
 $('#seeToDos').on('click', '#completeButton', completeClicked);
 }
+    
+function submitTask() {
     var toDoItem = $('#toDoIn').val();
     var noteText = $('#noteIn').val();
-    var todoComplete = false;
-
-function submitTask() {
-    // var toDoItem = $('#toDoIn').val();
-    // var noteText = $('#noteIn').val();
-    // var todoComplete = false;
     console.log('task:', toDoItem);
     console.log('note:', noteText);
     var objectToSend = {
         task: toDoItem,
-        notes: noteText,
-        complete: complete
+        notes: noteText
     }
     $('#toDoIn').val('');
     $('#noteIn').val('');
@@ -36,8 +31,7 @@ $.ajax({
     url: '/todo',
     type: 'POST',
     data: objectToSend,
-    success: function (data){
-   console.log('added a new to do', data); 
+    success: function (data){ 
    refreshToDos();
     }
     
@@ -63,10 +57,10 @@ function appendToDos(todos) {
         var todo = todos[i];
         var $tr = $('<p></p>');
         $tr.data('To Do:', todo);
-        $tr.append('<span>To do: ' + todo.task +  '  </span> ');
-        $tr.append('<span> Notes: ' + todo.notes +  '  </span> ');
-        $tr.append('<button id="deleteButton" class="btn btn-danger" data-id="' + todo.id + '">Delete</button>');
-        $tr.append('<button id="completeButton" class="btn btn-success" data-id="' + todo.id + '">Complete</button><br/>');
+        $tr.append('<span>To do: ' + todo.task +  '  </span>');
+        $tr.append('<span>Notes: ' + todo.notes +  '  </span>');
+        $tr.append('<button id="deleteButton" class="delete" data-id="' + todo.id + '">Delete</button>');
+        $tr.append('<button id="completeButton" class="complete" data-id="' + todo.id + '">Complete</button><br/>');
         $('#seeToDos').append($tr);
     }
 }
@@ -92,22 +86,16 @@ function completeClicked() {
     }).done(function(response){
         console.log(response);
         refreshToDos();
-        changeCompleted(todoId);
     }).fail(function(error){
         console.log('Did not complete correctly', error);
     });
 }
 
-    function changeCompleted(todoId) {
-        console.log(todoId);
-        
-        
-        // if ( todoComplete === true) {
-        //     console.log('true');
-        // }
-        // else {
-        //     console.log('false');
+    function changeCompleted() {
+        if (todo.complete === true) {
+            $('p').css('color', 'gray');
         }
+    }
         
 
     

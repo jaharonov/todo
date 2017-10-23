@@ -1,11 +1,17 @@
 .jumbotron {
     background-color: rgb(121, 206, 206)
-    
+
 }
+
+body {
+    background-color: rgb(254, 198, 208)
+}
+
 #title {
     color: darkgrey;
     text-align: center;
     vertical-align: middle;
+    font-family: 'Shrikhand', cursive;
 }
 
 #formArea {
@@ -16,4 +22,23 @@
 .activated {
     background-color: pink;
 
+}
+
+p, button {
+    font-family: 'Nixie One', cursive;
+    font-size: 24px;
+    
+
+}
+.delete {
+    background-color: lightgrey;
+    font-size: 16px;
+}
+.complete {
+    background-color: rgb(237, 184, 94);
+    font-size: 16px;
+}
+
+.completed {
+    color: greenyellow;
 }
