@@ -40,5 +40,6 @@ p, button {
 }
 
 .completed {
-    color: greenyellow;
+    color: rgb(132, 133, 128);
+    text-decoration: line-through;
 }

@@ -15,11 +15,14 @@ $('#seeToDos').on('click', '#completeButton', completeClicked);
 function submitTask() {
     var toDoItem = $('#toDoIn').val();
     var noteText = $('#noteIn').val();
+    var completeOrNot = false;
     console.log('task:', toDoItem);
     console.log('note:', noteText);
+    console.log('complete:', completeOrNot);
     var objectToSend = {
         task: toDoItem,
-        notes: noteText
+        notes: noteText,
+        complete: completeOrNot
     }
     $('#toDoIn').val('');
     $('#noteIn').val('');
@@ -53,7 +56,7 @@ function refreshToDos() {
 
 function appendToDos(todos) {
     $('#seeToDos').empty();
-    for (var i = 0; i < todos.length; i += 1) {
+    for (var i = 0; i < todos.length; i += 1){
         var todo = todos[i];
         var $tr = $('<p></p>');
         $tr.data('To Do:', todo);
@@ -62,6 +65,9 @@ function appendToDos(todos) {
         $tr.append('<button id="deleteButton" class="delete" data-id="' + todo.id + '">Delete</button>');
         $tr.append('<button id="completeButton" class="complete" data-id="' + todo.id + '">Complete</button><br/>');
         $('#seeToDos').append($tr);
+        if (todo.complete === true) {
+            $tr.addClass('completed');
+        }
     }
 }
 
@@ -84,18 +90,17 @@ function completeClicked() {
         method: 'PUT', 
         url: '/todo/' + todoId,
     }).done(function(response){
-        console.log(response);
         refreshToDos();
+        console.log('completed');  
     }).fail(function(error){
         console.log('Did not complete correctly', error);
     });
 }
 
-    function changeCompleted() {
-        if (todo.complete === true) {
-            $('p').css('color', 'gray');
-        }
-    }
+
+
+    
+    
         
 
     

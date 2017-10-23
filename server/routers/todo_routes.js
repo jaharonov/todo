@@ -20,8 +20,8 @@ router.post('/', function (req, res) {
             console.log('error connecting', errorConnectingToDb);
             res.sendStatus(500);
         } else {
-            var queryText = 'INSERT INTO "todo_list"("task", "notes") VALUES ($1, $2);';
-            db.query(queryText, [list.task, list.notes],
+            var queryText = 'INSERT INTO "todo_list"("task", "notes", "complete") VALUES ($1, $2, $3);';
+            db.query(queryText, [list.task, list.notes, list.complete],
                 function (errorMakingQuery, result) {
                     done();
                     if (errorMakingQuery) {
@@ -104,6 +104,7 @@ router.put('/:id', function (req, res) {
                     res.send(500);
                 } else {
                     res.sendStatus(201);
+                    
                 }
             }) //END QUERY
         }
